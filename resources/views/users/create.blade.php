@@ -4,7 +4,7 @@
     <div class="row">
         <h2>Add user</h2>
     </div>
-    <form action="{{route('users.store')}}" method="post">
+    <form action="{{route('users.store')}}" method="POST">
         @csrf
         <div class="form-group">
             <label for="name">Name</label>

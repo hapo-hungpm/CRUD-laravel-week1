@@ -42,7 +42,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('/users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
 
@@ -77,12 +77,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->name = $request->user_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('/users');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -93,8 +93,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/users');
+        User::findOrFail($id)->delete();
+        return redirect()->route('users.index');
     }
 }
